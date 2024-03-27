@@ -1,60 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" dir="ltr" data-cast-api-enabled="true">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>jansenflix</title>
-    <link rel="icon" href="https://tinyurl.com/yx5zvq2b">
+    <style>img[alt="www.000webhost.com"]{display:none;}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>video</title>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css">
+<link rel="icon" href="https://tinyurl.com/yx5zvq2b">
+
+<style type="text/css" media="all">
+            html,body.plyr{
+                height:100%;
+                width:100%;
+                margin:0;
+                overflow:
+                hidden;
+                background: black
+                }
+            #player{
+                width:100%;
+                height:100%;
+                overflow:hidden
+            }
+            .plyr__captions .plyr__caption {
+  				background: !important;
+  				font-family: Cambria;
+              	color: #FFFF00 !important;
+              	background-color:rgba(0, 0, 0, 0.1);
+              	font-size: 150%;
+			}
+        </style>
 </head>
-<style>
-video::cue {
-font-size: 100%;
-color: #FFFF00 !important;
-background-color: transparent;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-</style>
+<body class="plyr">
 
-<body>
-    <!--navbar -->
-    <header id="navt">
-        <img src="mg1.png" alt="imagem impresa">
-        <h2>jansenflix</h2>
-        <nav>
-            <ul id="nav-lista1">
-                <li><a href="https://jansenflix.github.io/lancamentos/#">Filmes</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </nav>
-    </header>
-    <!--fim-navbar -->
-
-    <!--baner inicio -->
-    <main>
-       <div class="mensagem">
-           <h1>sinopse</h1>
-           <p>
-           <b>ter sido agraciado com os poderes onipotentes dos deuses egípcios - e preso com a mesma rapidez - Adão Negro (Johnson) é libertado de sua tumba terrena, pronto para liberar sua forma única de justiça no mundo moderno.</b>
-           </p>
-       </div>
-        
-        
-        <div class="content"></div>
-        <iframe src='//iplayerhd.com/player/video/4988fbb2-ed7c-489c-a289-8cdd917e2a0d?cbartype=auto' allowtransparency='true' frameborder='0' scrolling='no'  allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width='500' height='281'></iframe>
-   
-           
-       </div>
-    </main>
-    <!--baner fim -->
-
-     <!--roda pe -->
-     <footer>
-         <h1>pixflix</h1>
-     </footer>
-      <!--fim roda pe-->
-
+<iframe src='//iplayerhd.com/player/video/4988fbb2-ed7c-489c-a289-8cdd917e2a0d?cbartype=auto' allowtransparency='true' frameborder='0' scrolling='no'  allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width='100%' height='100%'></iframe>
 </body>
-</html>
+<script src="//cdn.jsdelivr.net/npm/hls.js@latest" type="97c93f870f1447906a5988c3-text/javascript"></script>
+<script src="https://cdn.plyr.io/3.5.10/plyr.js" crossorigin="anonymous" type="97c93f870f1447906a5988c3-text/javascript"></script>
+<script type="97c93f870f1447906a5988c3-text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      	const controls = ['rewind','play','play-large','fast-forward','progress', 'current-time','duration','mute','volume','download','settings','airplay','pip','fullscreen'],settings= ['captions', 'quality','speed'];
+        var player = new Plyr(document.getElementById('player'), {quality: {default: 1080,options: [1080, 720, 480],forced: true,onChange: null,},controls,settings});
+            player.on('ready', function(event){
+                var instance = event.detail.plyr;
+
+                var hslSource = null;
+                var sources = instance.media.querySelectorAll('source'), i;
+                for (i = 0; i < sources.length; ++i) {
+                    if(sources[i].src.indexOf('.m3u8') > -1){
+                        hslSource = sources[i].src;
+                    }
+                }
+
+                if (hslSource !== null && Hls.isSupported()) {
+                    var hls = new Hls();
+                        hls.loadSource(hslSource);
+                        hls.attachMedia(instance.media);
+                        hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                            console.log('MANIFEST_PARSED');
+                        });
+                }
+              console.log(player.source);
+            });
+    });
+</script>
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="97c93f870f1447906a5988c3-|49" defer=""></script></html>
